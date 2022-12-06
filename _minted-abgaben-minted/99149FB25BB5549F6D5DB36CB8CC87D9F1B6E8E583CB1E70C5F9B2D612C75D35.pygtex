@@ -1,0 +1,15 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kt}{int} \PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{12}
+\PYG{k+kt}{int} \PYG{n}{b} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+
+\PYG{k}{while} \PYG{p}{(}\PYG{n}{a} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{24}\PYG{p}{)} \PYG{p}{\PYGZob{}} 
+  \PYG{k}{switch} \PYG{p}{(}\PYG{n}{a}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+    \PYG{k}{case} \PYG{p}{:} \PYG{l+m+mi}{0}
+      \PYG{n}{b} \PYG{o}{=} \PYG{n}{b} \PYG{o}{+} \PYG{n}{a}\PYG{p}{;}
+    \PYG{k}{case} \PYG{l+m+mi}{1}\PYG{p}{:}
+      \PYG{k}{if} \PYG{n}{a} \PYG{o}{=} \PYG{l+m+mi}{12} \PYG{p}{\PYGZob{}\PYGZob{}}\PYG{k}{return}\PYG{p}{;\PYGZcb{}\PYGZcb{}}
+    \PYG{k}{default}\PYG{p}{:}
+      \PYG{n}{a} \PYG{o}{=} \PYG{n}{a} \PYG{o}{\PYGZhy{}} \PYG{l+m+mi}{1}\PYG{p}{;}
+  \PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,225 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.File}\PYG{p}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.io.IOException}\PYG{p}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{java.awt.image.BufferedImage}\PYG{p}{;}
+\PYG{k+kn}{import} \PYG{n+nn}{javax.imageio.ImageIO}\PYG{p}{;}
+
+\PYG{k+kd}{public} \PYG{k+kd}{class} \PYG{n+nc}{MakeNikolaus}\PYG{p}{\PYGZob{}}
+
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{main}\PYG{p}{(}\PYG{n}{String} \PYG{n}{args}\PYG{o}{[]}\PYG{p}{)}\PYG{k+kd}{throws} \PYG{n}{IOException}\PYG{p}{\PYGZob{}}
+
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+		\PYG{c+c1}{// Aufgabe a) Pfad zur Bilddatei auf IHREM Rechner anpassen.}
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+
+		\PYG{c+c1}{// Pfad zur Bilddatei:}
+		\PYG{n}{String} \PYG{n}{path} \PYG{o}{=} \PYG{l+s}{\PYGZdq{}C:\PYGZbs{}\PYGZbs{}Users\PYGZbs{}\PYGZbs{}felix\PYGZbs{}\PYGZbs{}OneDrive\PYGZbs{}\PYGZbs{}Studium\PYGZbs{}\PYGZbs{}Uni Münster\PYGZbs{}\PYGZbs{}Informatik\PYGZbs{}\PYGZbs{}1. Semester\PYGZbs{}\PYGZbs{}Informatik 1\PYGZbs{}\PYGZbs{}Übungszettel\PYGZbs{}\PYGZbs{}Übungszettel LaTeX\PYGZbs{}\PYGZbs{}Hausaufgaben\PYGZbs{}\PYGZbs{}Blatt 8\PYGZbs{}\PYGZbs{}images\PYGZdq{}}\PYG{p}{;}
+		\PYG{n}{String} \PYG{n}{filename} \PYG{o}{=} \PYG{n}{path} \PYG{o}{+} \PYG{l+s}{\PYGZdq{}\PYGZbs{}\PYGZbs{}Nikolaus.jpg\PYGZdq{}}\PYG{p}{;}
+
+
+
+
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+		\PYG{c+c1}{// Folgenden Code bitte VOR den weiteren Aufgaben stehen lassen}
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+
+		\PYG{c+c1}{// Lade Bilddatei:}
+		\PYG{n}{MyFile} \PYG{n}{f} \PYG{o}{=} \PYG{k}{new} \PYG{n}{MyFile}\PYG{p}{(}\PYG{k+kc}{null}\PYG{p}{);}
+		\PYG{n}{BufferedImage} \PYG{n}{img} \PYG{o}{=} \PYG{n}{loadImage}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{filename}\PYG{p}{);}
+		\PYG{c+c1}{// Konvertiere in 2D Array}
+		\PYG{k+kt}{int}\PYG{o}{[][]} \PYG{n}{imageArray} \PYG{o}{=} \PYG{n}{BufferedImageToArray}\PYG{p}{(}\PYG{n}{img}\PYG{p}{);}
+
+		\PYG{c+c1}{// Lies Bildgröße aus:}
+		\PYG{k+kt}{int} \PYG{n}{width} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getWidth}\PYG{p}{();} \PYG{c+c1}{// 300px}
+		\PYG{k+kt}{int} \PYG{n}{height} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getHeight}\PYG{p}{();} \PYG{c+c1}{// 600px}
+
+
+
+
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+		\PYG{c+c1}{//}
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+		\PYG{c+c1}{// Aufgabe a)}
+		\PYG{c+c1}{// Das Bild liegt nun im 2D Array \PYGZdq{}imageArray\PYGZdq{} vor.}
+		\PYG{c+c1}{// Dabei gibt die erste Dimension die Pixelposition der Breite vor,}
+		\PYG{c+c1}{// die zweite Dimension die Pixelposition der Höhe.}
+		\PYG{c+c1}{// imageArray[0][0] speichert daher den Wert des ersten Pixels oben links.}
+		\PYG{c+c1}{// imageArray[1][0] speichert den Wert des Pixels rechts davon.}
+		\PYG{c+c1}{// imageArray[0][1] speichert den Wert unterhalb des ersten Pixels.}
+		\PYG{c+c1}{// Verallgemeinert gilt also: imageArray[y][x]}
+		\PYG{c+c1}{//}
+		\PYG{c+c1}{// Schreiben Sie in den folgenden Zeilen einen Code, der jedes Pixel besucht}
+		\PYG{c+c1}{// und daraufhin den Farbwert per zurückbekommt.}
+		\PYG{c+c1}{// Beispiel: int color = imageArray[0][0];}
+		\PYG{c+c1}{// Nutzen Sie dafür die Bilddimensionen width und height}
+		\PYG{c+c1}{//}
+		\PYG{c+c1}{// Überprüfen Sie den Farbwert jedes Pixels darauf,}
+		\PYG{c+c1}{// ob er blau ist. Dies geschieht durch die Funktion isBlue}
+		\PYG{c+c1}{// isBlue(int color) liefert also true zurück, wenn das Pixel blau ist.}
+		\PYG{c+c1}{// Wenn Sie ein blaues Pixel gefunden haben, ändern Sie die Farbe des Pixels in rot.}
+		\PYG{c+c1}{// Dies geschieht mit Hilf der Funktion makeColor(int r, int g, int b).}
+		\PYG{c+c1}{// Ein Pixel kann also wiefolgt verändert werden:}
+		\PYG{c+c1}{// imageArray[y][x] = makeColor(r,g,b)}
+		\PYG{c+c1}{// Dabei soll r = 255, g = 0 und b = 0 sein.}
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+
+\PYG{c+c1}{//		Aufgabe 8.6a}
+\PYG{c+c1}{//		for(int cols = 0; cols \PYGZlt{} height; cols++)\PYGZob{}}
+\PYG{c+c1}{//			for(int rows = 0; rows \PYGZlt{} width; rows++)\PYGZob{}}
+\PYG{c+c1}{//				int color = imageArray[cols][rows];}
+\PYG{c+c1}{//				if (isBlue(color))\PYGZob{}}
+\PYG{c+c1}{//					imageArray[cols][rows] = makeColor(255, 0, 0);}
+\PYG{c+c1}{//				\PYGZcb{}}
+\PYG{c+c1}{//			\PYGZcb{}}
+\PYG{c+c1}{//		\PYGZcb{}}
+
+\PYG{c+c1}{//		Aufgabe 8.6b}
+
+		\PYG{k+kt}{int} \PYG{n}{green} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
+		\PYG{k+kt}{int} \PYG{n}{blue} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{;}
+		\PYG{k+kt}{int} \PYG{n}{red} \PYG{o}{=} \PYG{l+m+mi}{200}\PYG{p}{;}
+
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{cols} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{cols} \PYG{o}{\PYGZlt{}} \PYG{n}{height}\PYG{p}{;} \PYG{n}{cols}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+			\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{rows} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{rows} \PYG{o}{\PYGZlt{}} \PYG{n}{width}\PYG{p}{;} \PYG{n}{rows}\PYG{o}{++}\PYG{p}{)\PYGZob{}}
+				\PYG{k+kt}{int} \PYG{n}{color} \PYG{o}{=} \PYG{n}{imageArray}\PYG{o}{[}\PYG{n}{cols}\PYG{o}{][}\PYG{n}{rows}\PYG{o}{]}\PYG{p}{;}
+				\PYG{k}{if} \PYG{p}{(}\PYG{n}{isBlue}\PYG{p}{(}\PYG{n}{color}\PYG{p}{))\PYGZob{}}
+					\PYG{n}{green} \PYG{o}{=} \PYG{p}{(}\PYG{n}{green} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{green}\PYG{p}{;}
+					\PYG{n}{blue} \PYG{o}{=} \PYG{p}{(}\PYG{n}{blue} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{blue}\PYG{p}{;}
+					\PYG{n}{red} \PYG{o}{=} \PYG{p}{(}\PYG{n}{red} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{red}\PYG{p}{;}
+					\PYG{n}{imageArray}\PYG{o}{[}\PYG{n}{cols}\PYG{o}{][}\PYG{n}{rows}\PYG{o}{]} \PYG{o}{=} \PYG{n}{makeColor}\PYG{p}{(}\PYG{n}{red}\PYG{p}{,} \PYG{n}{green}\PYG{p}{,} \PYG{n}{blue}\PYG{p}{);}
+					\PYG{n}{green}\PYG{o}{+=} \PYG{l+m+mi}{30}\PYG{p}{;}
+					\PYG{n}{blue}\PYG{o}{+=} \PYG{l+m+mi}{30}\PYG{p}{;}
+					\PYG{n}{red}\PYG{o}{+=} \PYG{l+m+mi}{30}\PYG{p}{;}
+				\PYG{p}{\PYGZcb{}}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+
+
+		\PYG{c+c1}{// ////////////////////////////////////////////////////	}
+		\PYG{c+c1}{// Den folgenden Code bitte immer NACH Ihrem Code stehen lassen:}
+		\PYG{c+c1}{// ////////////////////////////////////////////////////}
+
+		\PYG{c+c1}{// Verwandle Array zu Bilddatei}
+		\PYG{n}{ArrayToBufferedImage}\PYG{p}{(}\PYG{n}{imageArray}\PYG{p}{,} \PYG{n}{img}\PYG{p}{);}
+		\PYG{c+c1}{// Schreibe Bild an den selben Ort wie das Eingangsbild}
+		\PYG{n}{writeImage}\PYG{p}{(}\PYG{n}{f}\PYG{p}{,} \PYG{n}{img}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+
+
+
+
+	\PYG{c+c1}{// ////////////////////////////////////////////////////}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{// Bitte Funktionen unterhalb dieses Kommentars NICHT verändern}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{// Oh, Sie haben doch entschieden, bis hier hin weiterzulesen?}
+	\PYG{c+c1}{// Na dann hoffe ich, Sie lernen noch was schönes dabei :)}
+	\PYG{c+c1}{//}
+	\PYG{c+c1}{// ////////////////////////////////////////////////////}
+
+
+	\PYG{c+c1}{// Funktion die den Farbwert in die Bestandteile r,g,b aufteilt}
+	\PYG{c+c1}{// und überprüft, ob ein sehr hoher Blauanteil und sehr niedriger Rotanteil vorliegt:}
+	\PYG{k+kd}{private} \PYG{k+kd}{static} \PYG{k+kt}{boolean} \PYG{n+nf}{isBlue}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{color}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{k+kt}{int} \PYG{n}{r} \PYG{o}{=} \PYG{p}{(}\PYG{n}{color}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{l+m+mi}{16}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xff}\PYG{p}{;}
+		\PYG{k+kt}{int} \PYG{n}{g} \PYG{o}{=} \PYG{p}{(}\PYG{n}{color}\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{l+m+mi}{8}\PYG{p}{)} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xff}\PYG{p}{;}
+		\PYG{k+kt}{int} \PYG{n}{b} \PYG{o}{=} \PYG{n}{color} \PYG{o}{\PYGZam{}} \PYG{l+m+mh}{0xff}\PYG{p}{;}
+
+		\PYG{k}{if} \PYG{p}{(}\PYG{n}{b} \PYG{o}{\PYGZgt{}} \PYG{l+m+mi}{200} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n}{r} \PYG{o}{\PYGZlt{}} \PYG{l+m+mi}{50}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+			\PYG{k}{return} \PYG{k+kc}{true}\PYG{p}{;}
+		\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+			\PYG{k}{return} \PYG{k+kc}{false}\PYG{p}{;}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+
+
+	\PYG{c+c1}{// Funktion, die r,g,b Intensitätswerte nimmt und in einen Pixelwert umwandelt.}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{int} \PYG{n+nf}{makeColor}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{r}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{g}\PYG{p}{,} \PYG{k+kt}{int} \PYG{n}{b}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{k}{return} \PYG{p}{(}\PYG{l+m+mi}{255}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+m+mi}{24}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{r}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+m+mi}{16}\PYG{p}{)} \PYG{o}{|} \PYG{p}{(}\PYG{n}{g}\PYG{o}{\PYGZlt{}\PYGZlt{}}\PYG{l+m+mi}{8}\PYG{p}{)} \PYG{o}{|} \PYG{n}{b}\PYG{p}{;}    
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{c+c1}{// Konvertiert ein BufferedImage Objekt in ein 2D Array}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{int}\PYG{o}{[][]} \PYG{n+nf}{BufferedImageToArray}\PYG{p}{(}\PYG{n}{BufferedImage} \PYG{n}{img}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{k+kt}{int} \PYG{n}{width} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getWidth}\PYG{p}{();}
+		\PYG{k+kt}{int} \PYG{n}{height} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getHeight}\PYG{p}{();}
+
+		\PYG{k+kt}{int}\PYG{o}{[][]} \PYG{n}{twoDarray} \PYG{o}{=} \PYG{k}{new} \PYG{k+kt}{int}\PYG{o}{[}\PYG{n}{height}\PYG{o}{][}\PYG{n}{width}\PYG{o}{]}\PYG{p}{;}
+
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{x} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{x} \PYG{o}{\PYGZlt{}} \PYG{n}{width}\PYG{p}{;} \PYG{n}{x}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+			\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{y} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{y} \PYG{o}{\PYGZlt{}} \PYG{n}{height}\PYG{p}{;} \PYG{n}{y}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+				\PYG{n}{twoDarray}\PYG{o}{[}\PYG{n}{y}\PYG{o}{][}\PYG{n}{x}\PYG{o}{]} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getRGB}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{y}\PYG{p}{);}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+
+		\PYG{k}{return} \PYG{n}{twoDarray}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{c+c1}{// Konvertiert ein 2D Array in ein BufferedImage Objekt}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{ArrayToBufferedImage}\PYG{p}{(}\PYG{k+kt}{int}\PYG{o}{[][]} \PYG{n}{twoDarray}\PYG{p}{,} \PYG{n}{BufferedImage} \PYG{n}{img}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+
+		\PYG{k+kt}{int} \PYG{n}{width} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getWidth}\PYG{p}{();}
+		\PYG{k+kt}{int} \PYG{n}{height} \PYG{o}{=} \PYG{n}{img}\PYG{p}{.}\PYG{n+na}{getHeight}\PYG{p}{();}
+
+		\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{i} \PYG{o}{\PYGZlt{}} \PYG{n}{width}\PYG{p}{;} \PYG{n}{i}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+			\PYG{k}{for}\PYG{p}{(}\PYG{k+kt}{int} \PYG{n}{j} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;} \PYG{n}{j} \PYG{o}{\PYGZlt{}} \PYG{n}{height}\PYG{p}{;} \PYG{n}{j}\PYG{o}{++}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+				\PYG{n}{img}\PYG{p}{.}\PYG{n+na}{setRGB}\PYG{p}{(}\PYG{n}{i}\PYG{p}{,} \PYG{n}{j}\PYG{p}{,} \PYG{n}{twoDarray}\PYG{o}{[}\PYG{n}{j}\PYG{o}{][}\PYG{n}{i}\PYG{o}{]}\PYG{p}{);}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{c+c1}{// Lädt eine Bilddatei am angegebenen Pfad}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{n}{BufferedImage} \PYG{n+nf}{loadImage}\PYG{p}{(}\PYG{n}{MyFile} \PYG{n}{f}\PYG{p}{,} \PYG{n}{String} \PYG{n}{filename}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n}{BufferedImage} \PYG{n}{img} \PYG{o}{=} \PYG{k+kc}{null}\PYG{p}{;}
+		\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Lade Bild:\PYGZdq{}}\PYG{p}{);}
+		\PYG{c+c1}{// Try to read the image}
+		\PYG{k}{try}\PYG{p}{\PYGZob{}}
+			\PYG{n}{f}\PYG{p}{.}\PYG{n+na}{myFile} \PYG{o}{=} \PYG{k}{new} \PYG{n}{File}\PYG{p}{(}\PYG{n}{filename}\PYG{p}{);}
+			\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Prüfe Pfad: \PYGZdq{}} \PYG{o}{+} \PYG{n}{f}\PYG{p}{.}\PYG{n+na}{myFile}\PYG{p}{.}\PYG{n+na}{getPath}\PYG{p}{());}
+			\PYG{n}{img} \PYG{o}{=} \PYG{n}{ImageIO}\PYG{p}{.}\PYG{n+na}{read}\PYG{p}{(}\PYG{n}{f}\PYG{p}{.}\PYG{n+na}{myFile}\PYG{p}{);}
+			\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Bild erfolgreich geladen\PYGZdq{}}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}} \PYG{k}{catch}\PYG{p}{(}\PYG{n}{IOException} \PYG{n}{e}\PYG{p}{)\PYGZob{}}
+			\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{n}{e}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{k}{return} \PYG{n}{img}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{c+c1}{// Speichert das bearbeitete Bild an der selben Stelle wie das originale Bild}
+	\PYG{k+kd}{public} \PYG{k+kd}{static} \PYG{k+kt}{void} \PYG{n+nf}{writeImage}\PYG{p}{(}\PYG{n}{MyFile} \PYG{n}{f}\PYG{p}{,} \PYG{n}{BufferedImage} \PYG{n}{img}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Speichere Bild:\PYGZdq{}}\PYG{p}{);}
+		\PYG{k}{try}\PYG{p}{\PYGZob{}}
+			\PYG{n}{File} \PYG{n}{g} \PYG{o}{=} \PYG{k}{new} \PYG{n}{File}\PYG{p}{(}\PYG{n}{f}\PYG{p}{.}\PYG{n+na}{myFile}\PYG{p}{.}\PYG{n+na}{getParent}\PYG{p}{()}\PYG{o}{+}\PYG{l+s}{\PYGZdq{}\PYGZbs{}\PYGZbs{}NewNikolaus.jpg\PYGZdq{}}\PYG{p}{);}
+			\PYG{n}{ImageIO}\PYG{p}{.}\PYG{n+na}{write}\PYG{p}{(}\PYG{n}{img}\PYG{p}{,} \PYG{l+s}{\PYGZdq{}jpg\PYGZdq{}}\PYG{p}{,} \PYG{n}{g}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}\PYG{k}{catch}\PYG{p}{(}\PYG{n}{IOException} \PYG{n}{e}\PYG{p}{)\PYGZob{}}
+			\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{n}{e}\PYG{p}{);}
+		\PYG{p}{\PYGZcb{}}
+		\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Bild erfolgreich gespeichert:\PYGZdq{}}\PYG{p}{);}
+		\PYG{n}{System}\PYG{p}{.}\PYG{n+na}{out}\PYG{p}{.}\PYG{n+na}{println}\PYG{p}{(}\PYG{n}{f}\PYG{p}{.}\PYG{n+na}{myFile}\PYG{p}{.}\PYG{n+na}{getParent}\PYG{p}{()}\PYG{o}{+}\PYG{l+s}{\PYGZdq{}\PYGZbs{}\PYGZbs{}NewNikolaus.jpg\PYGZdq{}}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{c+c1}{// Wrapperklasse, um File Objekt weiterzugeben}
+\PYG{k+kd}{class} \PYG{n+nc}{MyFile} \PYG{p}{\PYGZob{}}
+	\PYG{k+kd}{public} \PYG{n}{File} \PYG{n}{myFile}\PYG{p}{;}
+
+	\PYG{n}{MyFile}\PYG{p}{(}\PYG{n}{File} \PYG{n}{myFile}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{k}{this}\PYG{p}{.}\PYG{n+na}{myFile} \PYG{o}{=} \PYG{n}{myFile}\PYG{p}{;}
+	\PYG{p}{\PYGZcb{}}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
