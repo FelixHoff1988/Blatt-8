@@ -63,6 +63,10 @@ public class MakeNikolaus{
 		// ////////////////////////////////////////////////////
 
 //		Aufgabe 8.6a
+//		Bei Bildern handelt es sich um 2D-Matrizen, welche mit ineinander verschachtelten
+//		for-Schleifen pixel für Pixel durchlaufen werden können. Die Farbe des aktuell
+//		betrachteten Pixels wird in color gespeichert und mit isBlue(color) auf die Farbe 
+//		blau geprüft. Wenn das true ist wird die Farbe mit makeColor() auf rot gesetzt.
 //		for(int cols = 0; cols < height; cols++){
 //			for(int rows = 0; rows < width; rows++){
 //				int color = imageArray[cols][rows];
@@ -73,7 +77,12 @@ public class MakeNikolaus{
 //		}
 
 //		Aufgabe 8.6b
-
+//		Hier gilt dasselbe Prinzip wie oben, vorher werden jedoch integer für rot, grün und blau gesetzt.
+//		innerhalb der for-Schleifen wir geprüft, ob einer dieser werde größer als 255 ist und falls dies
+//		true ist auf den Ursprünglichen Wert zurückgesetzt, da der rgb Farbraum auf 255 Pixel begrenzt ist.ü
+// 		Mit makeColor wir das betrachtete Pixel auf den für diese Iterations geltendenen rgb-Wert gesetzt
+//		und anschließend werden die rgb-Werte erhöht um einen recht willkürlichen Farbverlauf zu erzeugen. 
+//		um diesen zu erkennen muss man der Bild evtl. etwas vergrößern.
 		int green = 0;
 		int blue = 100;
 		int red = 200;
@@ -83,8 +92,8 @@ public class MakeNikolaus{
 				int color = imageArray[cols][rows];
 				if (isBlue(color)){
 					green = (green >= 255) ? 0 : green;
-					blue = (blue >= 255) ? 0 : blue;
-					red = (red >= 255) ? 0 : red;
+					blue = (blue >= 255) ? 100 : blue;
+					red = (red >= 255) ? 200 : red;
 					imageArray[cols][rows] = makeColor(red, green, blue);
 					green+= 30;
 					blue+= 30;

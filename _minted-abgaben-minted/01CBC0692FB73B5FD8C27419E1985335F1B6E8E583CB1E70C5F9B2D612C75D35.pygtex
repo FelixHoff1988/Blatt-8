@@ -64,6 +64,10 @@
 		\PYG{c+c1}{// ////////////////////////////////////////////////////}
 
 \PYG{c+c1}{//		Aufgabe 8.6a}
+\PYG{c+c1}{//		Bei Bildern handelt es sich um 2D\PYGZhy{}Matrizen, welche mit ineinander verschachtelten}
+\PYG{c+c1}{//		for\PYGZhy{}Schleifen pixel für Pixel durchlaufen werden können. Die Farbe des aktuell}
+\PYG{c+c1}{//		betrachteten Pixels wird in color gespeichert und mit isBlue(color) auf die Farbe }
+\PYG{c+c1}{//		blau geprüft. Wenn das true ist wird die Farbe mit makeColor() auf rot gesetzt.}
 \PYG{c+c1}{//		for(int cols = 0; cols \PYGZlt{} height; cols++)\PYGZob{}}
 \PYG{c+c1}{//			for(int rows = 0; rows \PYGZlt{} width; rows++)\PYGZob{}}
 \PYG{c+c1}{//				int color = imageArray[cols][rows];}
@@ -74,7 +78,12 @@
 \PYG{c+c1}{//		\PYGZcb{}}
 
 \PYG{c+c1}{//		Aufgabe 8.6b}
-
+\PYG{c+c1}{//		Hier gilt dasselbe Prinzip wie oben, vorher werden jedoch integer für rot, grün und blau gesetzt.}
+\PYG{c+c1}{//		innerhalb der for\PYGZhy{}Schleifen wir geprüft, ob einer dieser werde größer als 255 ist und falls dies}
+\PYG{c+c1}{//		true ist auf den Ursprünglichen Wert zurückgesetzt, da der rgb Farbraum auf 255 Pixel begrenzt ist.ü}
+\PYG{c+c1}{// 		Mit makeColor wir das betrachtete Pixel auf den für diese Iterations geltendenen rgb\PYGZhy{}Wert gesetzt}
+\PYG{c+c1}{//		und anschließend werden die rgb\PYGZhy{}Werte erhöht um einen recht willkürlichen Farbverlauf zu erzeugen. }
+\PYG{c+c1}{//		um diesen zu erkennen muss man der Bild evtl. etwas vergrößern.}
 		\PYG{k+kt}{int} \PYG{n}{green} \PYG{o}{=} \PYG{l+m+mi}{0}\PYG{p}{;}
 		\PYG{k+kt}{int} \PYG{n}{blue} \PYG{o}{=} \PYG{l+m+mi}{100}\PYG{p}{;}
 		\PYG{k+kt}{int} \PYG{n}{red} \PYG{o}{=} \PYG{l+m+mi}{200}\PYG{p}{;}
@@ -84,8 +93,8 @@
 				\PYG{k+kt}{int} \PYG{n}{color} \PYG{o}{=} \PYG{n}{imageArray}\PYG{o}{[}\PYG{n}{cols}\PYG{o}{][}\PYG{n}{rows}\PYG{o}{]}\PYG{p}{;}
 				\PYG{k}{if} \PYG{p}{(}\PYG{n}{isBlue}\PYG{p}{(}\PYG{n}{color}\PYG{p}{))\PYGZob{}}
 					\PYG{n}{green} \PYG{o}{=} \PYG{p}{(}\PYG{n}{green} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{green}\PYG{p}{;}
-					\PYG{n}{blue} \PYG{o}{=} \PYG{p}{(}\PYG{n}{blue} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{blue}\PYG{p}{;}
-					\PYG{n}{red} \PYG{o}{=} \PYG{p}{(}\PYG{n}{red} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{0} \PYG{p}{:} \PYG{n}{red}\PYG{p}{;}
+					\PYG{n}{blue} \PYG{o}{=} \PYG{p}{(}\PYG{n}{blue} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{100} \PYG{p}{:} \PYG{n}{blue}\PYG{p}{;}
+					\PYG{n}{red} \PYG{o}{=} \PYG{p}{(}\PYG{n}{red} \PYG{o}{\PYGZgt{}=} \PYG{l+m+mi}{255}\PYG{p}{)} \PYG{o}{?} \PYG{l+m+mi}{200} \PYG{p}{:} \PYG{n}{red}\PYG{p}{;}
 					\PYG{n}{imageArray}\PYG{o}{[}\PYG{n}{cols}\PYG{o}{][}\PYG{n}{rows}\PYG{o}{]} \PYG{o}{=} \PYG{n}{makeColor}\PYG{p}{(}\PYG{n}{red}\PYG{p}{,} \PYG{n}{green}\PYG{p}{,} \PYG{n}{blue}\PYG{p}{);}
 					\PYG{n}{green}\PYG{o}{+=} \PYG{l+m+mi}{30}\PYG{p}{;}
 					\PYG{n}{blue}\PYG{o}{+=} \PYG{l+m+mi}{30}\PYG{p}{;}
